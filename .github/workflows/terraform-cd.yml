@@ -13,6 +13,10 @@ jobs:
     name: Terraform Apply
     runs-on: ubuntu-latest
 
+    # This triggers GitHub Environment approval
+    environment:
+      name: production
+
     defaults:
       run:
         working-directory: terraform
@@ -25,11 +29,9 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        env:
-          TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_app_terraform_io }}
         run: terraform init
 
       - name: Terraform Apply
+        run: terraform apply -auto-approve
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_app_terraform_io }}
-        run: terraform apply -auto-approve
