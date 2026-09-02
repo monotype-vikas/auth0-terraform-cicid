@@ -1,14 +1,6 @@
 terraform {
   required_version = ">= 1.8.0"
 
-  cloud {
-    organization = "auth0-training"
-
-    workspaces {
-      name = "auth0-test"
-    }
-  }
-
   required_providers {
     auth0 = {
       source  = "auth0/auth0"
